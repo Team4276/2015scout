@@ -1,0 +1,13 @@
+extends layout 
+
+
+block head
+	link(href="css/scout.css", rel="stylesheet")
+block body
+	div.container-fluid
+		div.col-md-4#blue1
+			h2.text-center.strong= row['Blue 1']
+		div.col-md-4#blue2
+			h2.text-center.strong= row['Blue 2']
+		div.col-md-4#blue3
+			h2.text-center.strong= row['Blue 3']

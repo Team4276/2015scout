@@ -1,0 +1,47 @@
+extends layout 
+
+
+block head
+	title Scout a team
+	link(href='css/scout.css' rel='stylesheet')
+block body
+	div.container
+		form#scouter
+			form
+			div.row
+				div.col-md-3
+					label(for='teamNumber') Team Number
+					input.form-control.input-lg(type='text' placeholder='Team Number')#teamNumber
+				div.col-md-3
+					label(for='matchNumber') Match Number
+					input.form-control.input-lg(type='text' placeholder='Match Number')#matchNumber
+				div.col-md-3
+					label(for='alliance') Alliance
+					br
+					div.btn-group#alliance
+						button.btn.btn-default.btn-lg Red
+						button.btn.btn-default.btn-lg Blue
+			hr
+			div.row
+				div.col-md-4
+					h1.text-center Autonomous
+				div.col-md-8
+					h1.text-center Teleoperated
+			div.row
+				div.col-md-4
+					div.btn-group
+						button.btn.btn-default Move Forward
+						button.btn.btn-default Recycling Containers
+						button.btn.btn-default Totes
+						br
+						br
+						label(for='autoToteAmount') # Auto Totes:  
+						input(type='text')#autoToteAmount
+						hr
+						strong
+							p.text-center Additonal Comments
+						textarea(type='textarea' rows='10' cols='40')
+
+				div.col-md-8
+
+

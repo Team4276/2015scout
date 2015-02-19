@@ -1,0 +1,42 @@
+extends layout 
+
+
+block head
+	link(href="css/scout.css", rel="stylesheet")
+	script(src='js/redScout.js')
+
+block body
+	div.container-fluid
+		div.row
+			div.col-md-4#red1
+				h2.text-center.strong= row['Red 1']
+				hr
+				div.row
+					div.col-md-4.text-right
+						h4 Auto:
+					div.col-md-8
+						div.btn-group
+							button.btn Forward
+							button.btn Tote
+							button.btn Bin
+				hr
+				div.row
+					div.col-md-4.text-right
+						h4 Tote Pickup:
+					div.col-md-8
+						div.btn-group
+							button.btn Ground
+							button.btn Chute
+				div.row
+					div.col-md-4.text-right
+						h4 RC Pickup:
+					div.col-md-8
+						div.btn-group
+							button.btn Up
+							button.btn Down
+
+
+			div.col-md-4#red2
+				h2.text-center.strong= row['Red 2']
+			div.col-md-4#red3
+				h2.text-center.strong= row['Red 3']

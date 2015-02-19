@@ -1,0 +1,27 @@
+extends layout 
+
+block head
+	title Match Schedule
+
+block body
+	div.container
+		table.table.table-hover
+			tr
+				each field in fields
+					th= field.name
+			each row in rows
+				tr
+					td
+						a(href='matchView?match=' + row['Match'])= row['Match']
+					td
+						a(href='teamView?match=' + row['Red 1'])= row['Red 1']
+					td
+						a(href='teamView?match=' + row['Red 2'])= row['Red 2']
+					td
+						a(href='teamView?match=' + row['Red 3'])= row['Red 3']
+					td
+						a(href='teamView?match=' + row['Blue 1'])= row['Blue 1']
+					td
+						a(href='teamView?match=' + row['Blue 2'])= row['Blue 2']
+					td
+						a(href='teamView?match=' + row['Blue 3'])= row['Blue 3']
