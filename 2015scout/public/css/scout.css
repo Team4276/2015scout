@@ -1,0 +1,11 @@
+.hidden {
+    display: none;
+}
+
+.selected{
+    background-color: #2ecc71;    
+}
+
+.btn.active, .btn:active, .btn:focus{
+    background-color: #2ecc71;
+}

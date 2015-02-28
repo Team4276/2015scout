@@ -4,23 +4,31 @@ extends layout
 block head
 	title Scout a team
 	link(href='css/scout.css' rel='stylesheet')
+
+	script(src='js/scout.js')
 block body
 	div.container
-		form#scouter
-			form
+		form(action='/scout', method='POST')#scouter
 			div.row
 				div.col-md-3
-					label(for='teamNumber') Team Number
-					input.form-control.input-lg(type='text' placeholder='Team Number')#teamNumber
+					label(for='teamNumber' name='teamNumber') Team Number
+					input.form-control.input-lg(type='text' placeholder='Team Number' name='teamNumber')#teamNumber
 				div.col-md-3
 					label(for='matchNumber') Match Number
-					input.form-control.input-lg(type='text' placeholder='Match Number')#matchNumber
-				div.col-md-3
+					input.form-control.input-lg(type='text' placeholder='Match Number' name='matchNumber')#matchNumber
+				div.col-md-3.text-center
 					label(for='alliance') Alliance
 					br
-					div.btn-group#alliance
-						button.btn.btn-default.btn-lg Red
-						button.btn.btn-default.btn-lg Blue
+					div.btn-group
+						button(type='button').btn.btn-default.btn-lg.alliance Red
+						button(type='button').btn.btn-default.btn-lg.alliance Blue
+						input(type='text' name='alliance')#alliance.hidden
+
+				div.col-md-3
+					label(for='score') Score
+					input.form-control.input-lg(type='text' placeholder='Match Score' name='matchScore')#matchScore
+
+
 			hr
 			div.row
 				div.col-md-4
@@ -29,19 +37,138 @@ block body
 					h1.text-center Teleoperated
 			div.row
 				div.col-md-4
-					div.btn-group
-						button.btn.btn-default Move Forward
-						button.btn.btn-default Recycling Containers
-						button.btn.btn-default Totes
-						br
-						br
-						label(for='autoToteAmount') # Auto Totes:  
-						input(type='text')#autoToteAmount
-						hr
-						strong
-							p.text-center Additonal Comments
-						textarea(type='textarea' rows='10' cols='40')
+					div.row.text-center
+						button(type='button').btn.btn-default.moveForward Move Forward
+						input(type='checkbox' name='moveForward')#moveForward.hidden
+					br
+					div.row
+						div.col-md-6.text-right
+							h4 # Auto Totes:  
+						div.col-md-6
+							div.btn-group
+								button(type='button').btn.btn-default.autoTotes 0
+								button(type='button').btn.btn-default.autoTotes 1
+								button(type='button').btn.btn-default.autoTotes 2
+								button(type='button').btn.btn-default.autoTotes 3
+								input(type='text' name='autoTotes')#autoTotes.hidden
+					div.row
+						div.col-md-6.text-right
+							h4 # Auto Trash:
+						div.col-md-6
+							div.btn-group
+								button(type='button').btn.btn-default.autoTrash 0
+								button(type='button').btn.btn-default.autoTrash 1
+								button(type='button').btn.btn-default.autoTrash 2
+								button(type='button').btn.btn-default.autoTrash 3
+								input(type='text' name='autoTrash')#autoTrash.hidden
+
+
+					hr
+					strong
+						p.text-center Additonal Comments
+					textarea(type='textarea' rows='10' cols='40' name='additionalComments')#additionalComments
 
 				div.col-md-8
+					div.row
+						div.col-md-3.text-right
+							h4 Tote pickup:
+						div.col-md-9
+							div.btn-group
+								button(type='button').btn.btn-default.totePickupGround Ground
+								input(type='checkbox' name='totePickupGround')#totePickupGround.hidden
+								button(type='button').btn.btn-default.totePickupUpside Upside down
+								input(type='checkbox' name='totePickupUpside')#totePickupUpside.hidden
+								button(type='button').btn.btn-default.totePickupChute Chute
+								input(type='checkbox' name='totePickupChute')#totePickupChute.hidden
+								button(type='button').btn.btn-default.totePickupLandfill Landfill
+								input(type='checkbox' name='totePickupLandfill')#totePickupLandfill.hidden
+					div.row
+						div.col-md-3.text-right
+							h4 RC Pickup
+						div.col-md-6
+							div.btn-group
+								button(type='button').btn.btn-default.RCPickupUp Upright
+								input(type='checkbox' name='RCPickupUp')#RCPickupUp.hidden
+								button(type='button').btn.btn-default.RCPickupSide Sideways
+								input(type='checkbox' name='RCPickupSide')#RCPickupSide.hidden
+								button(type='button').btn.btn-default.RCPickupCentre Centre
+								input(type='checkbox' name='RCPickupCentre')#RCPickupCentre.hidden
+						div.col-md-3
+							button(type='button').btn.btn-default.otherStack Stack on Others
+							input(type='checkbox' name='otherStack')#otherStack.hidden
+					div.row
+						div.col-md-3.text-right
+							h4 Highest tote stack:
+						div.col-md-4.text-left
+							div.btn-group
+								button(type='button').btn.btn-default.highestToteStack 1
+								button(type='button').btn.btn-default.highestToteStack 2
+								button(type='button').btn.btn-default.highestToteStack 3
+								button(type='button').btn.btn-default.highestToteStack 4
+								button(type='button').btn.btn-default.highestToteStack 5
+								button(type='button').btn.btn-default.highestToteStack 6
+								input(type='text' name='highestToteStack')#highestToteStack.hidden
+						div.col-md-2.text-left
+							div.btn-group
+								button(type='button').btn.btn-default.highestToteRC RC
+								input(type='checkbox' name='highestToteRC')#highestToteRC.hidden
+								button(type='button').btn.btn-default.highestTotePN PN
+								input(type='checkbox' name='highestTotePN')#highestTotePN.hidden
+						div.col-md-3
+							div.btn-group
+								button(type='button').btn.btn-default.highestToteSpeed S
+								button(type='button').btn.btn-default.highestToteSpeed M
+								button(type='button').btn.btn-default.highestToteSpeed F
+								input(type='text' name='highestToteSpeed')#highestToteSpeed.hidden
+					div.row
+						div.col-md-3.text-right
+							h4 Good Stacks: 
+								span#goodStacksDisplay 0
+								input(type='text' name='goodStacks')#goodStacks.hidden
+						div.col-md-2
+							div.btn-group
+								button(type='button').btn.btn-default#goodStacksPlus +
+								button(type='button').btn.btn-default#goodStacksMinus -
+						div.col-md-3.text-right
+							h4 Bad Stacks: 
+								span#badStacksDisplay 0
+								input(type='text' name='badStacks')#badStacks.hidden
+						div.col-md-2
+							div.btn-group
+								button(type='button').btn.btn-default#badStacksPlus +
+								button(type='button').btn.btn-default#badStacksMinus -
+					div.row
+						div.col-md-3.text-right
+							h4 Human Player:
+						div.col-md-6
+							div.btn-group
+								button(type='button').btn.btn-default.humanNoodle Insert Noodle
+								input(type='checkbox' name='humanNoodle')#humanNoodle.hidden
+								button(type='button').btn.btn-default.humanThrow Throw Noodle
+								input(type='checkbox' name='humanThrow')#humanThrow.hidden
+					hre
+					div.row
+						div.col-md-3.text-right
+							h4 Co-op Stacks:
+						div.col-md-4
+							div.btn-group
+								button(type='button').btn.btn-default.coop 0
+								button(type='button').btn.btn-default.coop 1
+								button(type='button').btn.btn-default.coop 2
+								button(type='button').btn.btn-default.coop 3
+								button(type='button').btn.btn-default.coop 4
+								input(type='text' name='coop')#coop.hidden
+						div.col-md-3
+							button(type='button').btn.btn-default.coopOtherStack Stack on Others
+							input(type='checkbox' name='coopOtherStack')#coopOtherStack.hidden
+						div.col-md-2
+					hr
+					div.row.text-center
+						button.btn.btn-lg.btn-warning(type='submit')#submit Submit
+
+
+
+
+					
 
 
